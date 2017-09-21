@@ -9,7 +9,7 @@ class acIntervalClass {
 public:
 	acIntervalClass() {};
 	~acIntervalClass() {};
-	void begin(unsigned long timeInterval);
+	void begin(unsigned long timeInterval, unsigned long timeInit = 0);
 	bool dispatch();
 	unsigned long interval();
 	void pause();
