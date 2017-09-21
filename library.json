@@ -1,0 +1,16 @@
+{
+  "name": "acInterval",
+  "keywords": "time",
+  "description": "Library to control cycle of runtime methods.",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/neimar2009/acInterval"
+  },
+  "version": "0.0.1",
+  "frameworks": ["arduino", "C++", "C"],
+  "platforms": [
+    "Arduino",
+    "avr"
+  ]
+}

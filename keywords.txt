@@ -1,0 +1,27 @@
+#######################################
+# Syntax Coloring Map acInterval
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+acIntervalClass
+~acIntervalClass
+begin
+dispatch
+interval
+pause
+restart
+reset
+priorProcess
+nextProcess
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
