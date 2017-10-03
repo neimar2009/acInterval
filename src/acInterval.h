@@ -19,7 +19,7 @@ public:
 	unsigned long nextProcess();
 protected:
 private:
-	bool paused = false;
+	bool paused = true;
 	unsigned long timeInterval = 0;
-	unsigned long timeCount    = 0;
+	unsigned long initialTime  = 0;
 };
