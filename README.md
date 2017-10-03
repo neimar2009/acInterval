@@ -24,8 +24,8 @@ Help file
 ```
   void setup {
 
-  	processBlink1.begin(5000); // Interval of 5 seconds.
-  	processBlink2.begin(1234); // Interval of 1234 milliseconds.
+    processBlink1.begin(5000); // Interval of 5 seconds.
+    processBlink2.begin(1234); // Interval of 1234 milliseconds.
 
   ...
 ```
@@ -34,17 +34,17 @@ Help file
 ```
   void loop() {
 
-  	if(processBlink1.dispatch()) {  // Returns 'true' if the range is complete.
+    if(processBlink1.dispatch()) {  // Returns 'true' if the range is complete.
 
-  		blink1();
-  	}
+      blink1();
+    }
 
-  	if(processBlink2.dispatch()) {  // Returns 'true' if the range is complete.
+    if(processBlink2.dispatch()) {  // Returns 'true' if the range is complete.
 
-  		blink2();
-  	}
+      blink2();
+    }
 
-  	...
+    ...
 ```
 
   For lack of elaboration of a help file, please analyze the sample files.

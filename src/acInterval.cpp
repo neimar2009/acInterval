@@ -11,26 +11,29 @@
 void acIntervalClass::begin(unsigned long timeInterval, unsigned long timeInit = 0) {
 
   this->timeInterval = timeInterval;
-  this->timeCount = millis();
+  this->initialTime = millis();
   if (timeInit == 0) {
     timeInit = random(timeInterval);
   }
-  this->timeCount += timeInit;
+  this->initialTime += timeInit;
+  paused = false;
 }
 
 // Retorna: true, quando o intervalo estiver completo.
 bool acIntervalClass::dispatch() {
 
-  if (paused) return false;
   unsigned long timeNow = millis();
-  if(timeNow >= timeCount){
-    if ((timeNow - timeCount >= timeInterval)) {
-      timeCount += timeInterval;
+  if(timeNow >= initialTime){
+    if ((timeNow - initialTime >= timeInterval)) {
+      initialTime += timeInterval;
+      if (paused) return false;
       return true;
     } 
   } else {
-    if (timeCount > timeInterval)
-      while( timeNow - timeCount >= timeInterval) timeCount += timeInterval;
+    if (initialTime > timeInterval) {
+      timeNow = millis();
+      while((timeNow - initialTime) > timeInterval) initialTime += timeInterval;
+    }
   }
   return false;
 }
@@ -48,9 +51,10 @@ void acIntervalClass::pause() {
 // Reinicia o processo sincronizado como o momento inicial pré definido.
 void acIntervalClass::restart() {
   
-  for (int i = 0; i < 2; ++i) {
+  if(timeInterval == 0) return;
+  for (uint8_t i = 0; i < 2; ++i) {
     unsigned long timeNow = millis();
-    while(timeNow >= timeCount) timeCount += timeInterval;
+    while(timeNow <= (initialTime - timeInterval)) initialTime += timeInterval;
   }
   paused = false;
 }
@@ -59,12 +63,12 @@ void acIntervalClass::restart() {
 void acIntervalClass::reset(unsigned long timeInterval = 0) {
   
   if (timeInterval != 0) this->timeInterval = timeInterval;
-  timeCount = millis() + timeInterval;
+  initialTime = millis();
 }
 
 // Retorna o tempo do processo anterior.
 unsigned long acIntervalClass::priorProcess() {
-  return timeCount - timeInterval;
+  return initialTime - timeInterval;
 }
 
 // Retorna o tempo para o próximo proceso.
@@ -73,7 +77,5 @@ unsigned long acIntervalClass::nextProcess() {
     restart();
     pause();
   }
-  return timeCount;
+  return initialTime;
 }
-
-
