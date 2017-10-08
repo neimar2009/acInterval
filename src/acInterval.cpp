@@ -26,16 +26,32 @@ bool acIntervalClass::dispatch() {
   if(timeNow >= initialTime){
     if ((timeNow - initialTime >= timeInterval)) {
       initialTime += timeInterval;
+      // Quando pausado, primeiro atualiza 'initialTime' para então retornar 'false'.
       if (paused) return false;
+      vStepState++;
+      vStepCount++;
+      if(vStepCount>vStepCountLimit) vStepState = 1;
       return true;
     } 
   } else {
+    // Resolve o problema quando a contagem chega ao limite e retorna ao zero.
     if (initialTime > timeInterval) {
       timeNow = millis();
       while((timeNow - initialTime) > timeInterval) initialTime += timeInterval;
     }
   }
   return false;
+}
+
+// Intervalo par ou impar.
+bool acIntervalClass::stepState() {
+  return !(vStepState & 1);
+}
+
+//
+unsigned long acIntervalClass::stepCount() {
+
+  return vStepCount;
 }
 
 // Retorna: o tempo de intervalo em milisegundos.
@@ -53,6 +69,7 @@ void acIntervalClass::restart() {
   
   if(timeInterval == 0) return;
   for (uint8_t i = 0; i < 2; ++i) {
+    // Resolve o problema quando a contagem chega ao limite e retorna ao zero.
     unsigned long timeNow = millis();
     while(timeNow <= (initialTime - timeInterval)) initialTime += timeInterval;
   }
@@ -63,7 +80,7 @@ void acIntervalClass::restart() {
 void acIntervalClass::reset(unsigned long timeInterval = 0) {
   
   if (timeInterval != 0) this->timeInterval = timeInterval;
-  initialTime = millis();
+  this->initialTime = millis();
 }
 
 // Retorna o tempo do processo anterior.

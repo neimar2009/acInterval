@@ -11,6 +11,8 @@ public:
 	~acIntervalClass() {};
 	void begin(unsigned long timeInterval, unsigned long timeInit = 0);
 	bool dispatch();
+	bool stepState();
+	unsigned long stepCount();
 	unsigned long interval();
 	void pause();
 	void restart();
@@ -22,4 +24,7 @@ private:
 	bool paused = true;
 	unsigned long timeInterval = 0;
 	unsigned long initialTime  = 0;
+	unsigned long vStepState = 0;
+	unsigned long vStepCount = 0;
+	unsigned long vStepCountLimit = 0xFFFFFFFF;
 };
