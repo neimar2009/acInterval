@@ -9,8 +9,68 @@ Description
 * Cada instância criada manipula a execução de métodos independênte no tempo.
 
 
-Help file
+Help
 ------------
+
+
+```begin```
+
+  ```example.begin(timeInterval);```
+  or
+  ```example.begin(timeInterval, timeInit);```
+
+  timeInterval = Intervalo de tempo entre as execuções.
+  timeInit     = Momento de início das execuções após o sistema ter inicial.
+
+```dispatch```
+
+  Retorna verdade quando o intervalo de execução é alcançado.
+  Este é momento de executar um método ou grupo de métodos.
+
+```stepState```
+
+  Retorna a indicação se é um processo par ou impar.
+  Isto serve para intercalar estados na sua aplicação.
+
+```stepCount```
+
+  (Ainda não implementado.)
+  Retorna uma contagem de no máximo até a um valor pré especificado.
+
+```interval```
+
+  Retorna o intervalo de tempo entre processos.
+
+```pause```
+
+  Pausa o processo, isto faz ```dispatch()``` retornar sempre ```false```
+
+```restart```
+
+  Tira o processo do estado de pausa. A execução do processo será quando o intervalo se completar.
+
+```reset```
+
+  ```example.reset();```
+  or
+  ```example.reset(timeInterval);```
+
+  Reinicia o processo a contar do momento da execução do ```reset()``` mantendo o mesmo intervalo pré definido.    
+  timeInterval = Reinicia com um novo intervalo.
+
+```priorProcess```
+
+  Retorna o momento da processo anterior.
+
+```nextProcess```
+
+  Retorna o memento do próximo processo.
+
+
+
+Help example
+------------
+
 ```
   ...
 
@@ -24,7 +84,7 @@ Help file
 ```
   void setup {
 
-    processBlink1.begin(5000); // Interval of 5 seconds.
+    processBlink1.begin(500);  // Interval of 1/2 second.
     processBlink2.begin(1234); // Interval of 1234 milliseconds.
 
   ...
@@ -34,14 +94,17 @@ Help file
 ```
   void loop() {
 
-    if(processBlink1.dispatch()) {  // Returns 'true' if the range is complete.
-
-      blink1();
+    if(processBlink1.dispatch()){
+      digitalWrite(pinBlink1, processBlink1.stepState());
     }
 
-    if(processBlink2.dispatch()) {  // Returns 'true' if the range is complete.
-
-      blink2();
+    if(processBlink2.dispatch()){
+      digitalWrite(pinBlink2, processBlink2.stepState());
+      if (processBlink2.stepState()) {
+        processBlink2.reset(20);
+      } else {
+        processBlink2.reset(200);
+      }
     }
 
     ...
