@@ -48,6 +48,11 @@ bool acIntervalClass::stepState() {
   return !(vStepState & 1);
 }
 
+void acIntervalClass::stepCount(unsigned long count) {
+  
+  vStepCountLimit = count;
+}
+
 //
 unsigned long acIntervalClass::stepCount() {
 
