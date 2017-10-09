@@ -1,5 +1,5 @@
 
-#Library to control cycle of runtime methods.
+# Library to control cycle of runtime methods.
 
 Description
 ------------
@@ -12,61 +12,61 @@ Description
 Help
 ------------
 
-##begin
+### begin
 
   ```example.begin(timeInterval);```    
   or    
   ```example.begin(timeInterval, timeInit);```    
 
-  timeInterval = Intervalo de tempo entre as execuções.    
-  timeInit     = Momento de início das execuções após o sistema ter inicial.
+```timeInterval``` = Intervalo de tempo entre as execuções.     
+```timeInit```     = Momento de início das execuções após o sistema ter inicial.
 
-##dispatch
+### dispatch
 
   Retorna verdade quando o intervalo de execução é alcançado.    
   Este é momento de executar um método ou grupo de métodos.
 
-###stepState
+### stepState
 
   Retorna a indicação se é um processo par ou impar.    
   Isto serve para intercalar estados na sua aplicação.
 
-###stepCount
+### stepCount
 
   Retorna uma contagem de no máximo até a um valor pré especificado.
 
-###stepCount
+### stepCount
 
-  ```stepCount(count);```    
+  ```example.stepCount(count);```    
   Configura um contador incrementado a cada processo. A contagem recomeça quando chega ao limite dado por ```count```.
 
 
-###interval
+### interval
 
   Retorna o intervalo de tempo entre processos.
 
-###pause
+### pause
 
   Pausa o processo, isto faz ```dispatch()``` retornar sempre ```false```
 
-###restart
+### restart
 
   Tira o processo do estado de pausa. A execução do processo será quando o intervalo se completar.
 
-###reset
+### reset
 
   ```example.reset();```    
   or    
   ```example.reset(timeInterval);```    
 
   Reinicia o processo a contar do momento da execução do ```reset()``` mantendo o mesmo intervalo pré definido.    
-  timeInterval = Reinicia com um novo intervalo.
+  ```timeInterval``` = Reinicia com um novo intervalo.
 
-###priorProcess
+### priorProcess
 
   Retorna o momento da processo anterior.
 
-###nextProcess
+### nextProcess
 
   Retorna o memento do próximo processo.
 
