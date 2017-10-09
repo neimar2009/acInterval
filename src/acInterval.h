@@ -13,6 +13,7 @@ public:
 	bool dispatch();
 	bool stepState();
 	unsigned long stepCount();
+	void stepCount(unsigned long count);
 	unsigned long interval();
 	void pause();
 	void restart();
