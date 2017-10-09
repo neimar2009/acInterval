@@ -18,7 +18,7 @@ Help
   or    
   ```example.begin(timeInterval, timeInit);```    
 
-```timeInterval``` = Intervalo de tempo entre as execuções.     
+```timeInterval``` = Intervalo de tempo entre as execuções.     
 ```timeInit```     = Momento de início das execuções após o sistema ter inicial.
 
 ### dispatch
