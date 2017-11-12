@@ -16,7 +16,7 @@ Help
 
   ```acIntervalclass example(timeInterval);
 
-  timeInterval = Intervalo de tempo entre as execuções.    
+  timeInterval = Intervalo de tempo entre as execuções.
 
 ### begin
 
@@ -40,7 +40,7 @@ Help
 
 ### stepCount
 
-  ```stepCount(count);```    
+  ```example.stepCount(count);```    
   Configura um contador incrementado a cada processo. A contagem recomeça quando chega ao limite dado por ```count```.
 
 ### interval
@@ -62,7 +62,7 @@ Help
   ```example.reset(timeInterval);```    
 
   Reinicia o processo a contar do momento da execução do ```reset()``` mantendo o mesmo intervalo pré definido.    
-  timeInterval = Reinicia com um novo intervalo.
+  ```timeInterval``` = Reinicia com um novo intervalo.
 
 ### priorProcess
 
