@@ -12,9 +12,10 @@ Description
 Help
 ------------
 
-### acIntervalclass
 
-  ```acIntervalclass example(timeInterval);
+### acIntervalClass
+
+  ```acIntervalclass example(timeInterval);```
 
   timeInterval = Intervalo de tempo entre as execuções.
 
