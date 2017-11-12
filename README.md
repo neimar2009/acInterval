@@ -12,24 +12,27 @@ Description
 Help
 ------------
 
+### acIntervalclass
+
+  ```acIntervalclass example(timeInterval);
+
+  timeInterval = Intervalo de tempo entre as execuções.
+
 ### begin
 
-  ```example.begin(timeInterval);```    
-  or    
-  ```example.begin(timeInterval, timeInit);```    
+  ```example.begin(timeInit);```    
 
-```timeInterval``` = Intervalo de tempo entre as execuções.     
-```timeInit```     = Momento de início das execuções após o sistema ter inicial.
+  timeInit = Momento de início das execuções após o sistema ter inicial.
 
 ### dispatch
 
   Retorna verdade quando o intervalo de execução é alcançado.    
   Este é momento de executar um método ou grupo de métodos.
 
-### stepState
+### stepHigh
 
   Retorna a indicação se é um processo par ou impar.    
-  Isto serve para intercalar estados na sua aplicação.
+  Isto serve para intercalar estados na aplicação.
 
 ### stepCount
 
@@ -39,7 +42,6 @@ Help
 
   ```example.stepCount(count);```    
   Configura um contador incrementado a cada processo. A contagem recomeça quando chega ao limite dado por ```count```.
-
 
 ### interval
 
@@ -78,8 +80,8 @@ Help example
 ```
   ...
 
-  acIntervalClass processBlink1;
-  acIntervalClass processBlink2;
+  acIntervalClass processBlink1(500);  // Interval of 1/2 second.
+  acIntervalClass processBlink2(1234); // Interval of 1234 milliseconds.
 
   ...
 ```
@@ -88,8 +90,9 @@ Help example
 ```
   void setup {
 
-    processBlink1.begin(500);  // Interval of 1/2 second.
-    processBlink2.begin(1234); // Interval of 1234 milliseconds.
+    processBlink1.begin(250);  // Initial time of 1/4 second.
+    processBlink2.begin(1234); // Initial time of 1234 milliseconds.
+    processBlink2.begin();     // Initial time now.
 
   ...
 ```
@@ -103,8 +106,8 @@ Help example
     }
 
     if(processBlink2.dispatch()){
-      digitalWrite(pinBlink2, processBlink2.stepState());
-      if (processBlink2.stepState()) {
+      digitalWrite(pinBlink2, processBlink2.stepHigh());
+      if (processBlink2.stepHigh()) {
         processBlink2.reset(20);
       } else {
         processBlink2.reset(200);
