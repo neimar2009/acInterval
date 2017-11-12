@@ -8,14 +8,15 @@
 
 // timeIniterval: Interválo de execução;
 // timeInit: Momento de início, em milisegundos, após o inicio do sistema.
-void acIntervalClass::begin(unsigned long timeInterval, unsigned long timeInit = 0) {
+// void acIntervalClass::begin(unsigned long timeInterval, unsigned long timeInit = 0) {
+void acIntervalClass::begin(unsigned long timeInit = 0) {
 
-  this->timeInterval = timeInterval;
-  this->initialTime = millis();
+  // this->timeInterval = timeInterval;
+  this->lastTime = millis();
   if (timeInit == 0) {
-    timeInit = random(timeInterval);
+    timeInit = random(this->timeInterval);
   }
-  this->initialTime += timeInit;
+  this->lastTime += timeInit;
   paused = false;
 }
 
@@ -23,29 +24,28 @@ void acIntervalClass::begin(unsigned long timeInterval, unsigned long timeInit =
 bool acIntervalClass::dispatch() {
 
   unsigned long timeNow = millis();
-  if(timeNow >= initialTime){
-    if ((timeNow - initialTime >= timeInterval)) {
-      initialTime += timeInterval;
-      // Quando pausado, primeiro atualiza 'initialTime' para então retornar 'false'.
+  if(timeNow >= lastTime) {
+    if ((timeNow - lastTime >= timeInterval)) {
+      lastTime += timeInterval;
+      // Quando pausado, primeiro atualiza 'lastTime' para então retornar 'false'.
       if (paused) return false;
-      vStepState++;
+      vStepHigh++;
       vStepCount++;
-      if(vStepCount>vStepCountLimit) vStepState = 1;
+      if (vStepCount > vStepCountLimit) vStepCount = 1;
       return true;
     } 
   } else {
     // Resolve o problema quando a contagem chega ao limite e retorna ao zero.
-    if (initialTime > timeInterval) {
-      timeNow = millis();
-      while((timeNow - initialTime) > timeInterval) initialTime += timeInterval;
+    if (lastTime > timeInterval) {
+      while((timeNow - lastTime) > timeInterval) lastTime += timeInterval;
     }
   }
   return false;
 }
 
 // Intervalo par ou impar.
-bool acIntervalClass::stepState() {
-  return !(vStepState & 1);
+bool acIntervalClass::stepHigh() {
+  return (vStepHigh & 1);
 }
 
 void acIntervalClass::stepCount(unsigned long count) {
@@ -76,7 +76,7 @@ void acIntervalClass::restart() {
   for (uint8_t i = 0; i < 2; ++i) {
     // Resolve o problema quando a contagem chega ao limite e retorna ao zero.
     unsigned long timeNow = millis();
-    while(timeNow <= (initialTime - timeInterval)) initialTime += timeInterval;
+    while(timeNow <= (lastTime - timeInterval)) lastTime += timeInterval;
   }
   paused = false;
 }
@@ -85,12 +85,12 @@ void acIntervalClass::restart() {
 void acIntervalClass::reset(unsigned long timeInterval = 0) {
   
   if (timeInterval != 0) this->timeInterval = timeInterval;
-  this->initialTime = millis();
+  this->lastTime = millis();
 }
 
 // Retorna o tempo do processo anterior.
 unsigned long acIntervalClass::priorProcess() {
-  return initialTime - timeInterval;
+  return lastTime - timeInterval;
 }
 
 // Retorna o tempo para o próximo proceso.
@@ -99,5 +99,5 @@ unsigned long acIntervalClass::nextProcess() {
     restart();
     pause();
   }
-  return initialTime;
+  return lastTime;
 }

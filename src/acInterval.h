@@ -7,11 +7,12 @@
 
 class acIntervalClass {
 public:
-	acIntervalClass() {};
+	acIntervalClass(unsigned long timeInterval) : timeInterval(timeInterval) {};
 	~acIntervalClass() {};
-	void begin(unsigned long timeInterval, unsigned long timeInit = 0);
+	// void begin(unsigned long timeInterval, unsigned long timeInit = 0);
+	void begin(unsigned long timeInit = 0);
 	bool dispatch();
-	bool stepState();
+	bool stepHigh();
 	unsigned long stepCount();
 	void stepCount(unsigned long count);
 	unsigned long interval();
@@ -24,8 +25,8 @@ protected:
 private:
 	bool paused = true;
 	unsigned long timeInterval = 0;
-	unsigned long initialTime  = 0;
-	unsigned long vStepState = 0;
+	unsigned long lastTime   = 0;
 	unsigned long vStepCount = 0;
 	unsigned long vStepCountLimit = 0xFFFFFFFF;
+	uint8_t vStepHigh = 0;
 };
