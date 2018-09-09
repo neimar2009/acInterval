@@ -6,22 +6,22 @@
 # Datatypes (KEYWORD1)
 #######################################
 
+acIntervalClass	KEYWORD1
+
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
-acIntervalClass
-~acIntervalClass
-begin
-dispatch
-stepHigh
-stepCount
-interval
-pause
-restart
-reset
-priorProcess
-nextProcess
+begin	KEYWORD2
+dispatch	KEYWORD2
+stepHigh	KEYWORD2
+stepCount	KEYWORD2
+interval	KEYWORD2
+pause	KEYWORD2
+restart	KEYWORD2
+reset	KEYWORD2
+priorProcess	KEYWORD2
+nextProcess	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
