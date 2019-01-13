@@ -6,6 +6,8 @@
 # Datatypes (KEYWORD1)
 #######################################
 
+acIntervalClass	KEYWORD1
+
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
