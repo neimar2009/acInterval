@@ -12,6 +12,8 @@ acIntervalClass	KEYWORD1
 # Methods and Functions (KEYWORD2)
 #######################################
 
+acIntervalClass	KEYWORD2
+~acIntervalClass	KEYWORD2
 begin	KEYWORD2
 dispatch	KEYWORD2
 stepHigh	KEYWORD2
