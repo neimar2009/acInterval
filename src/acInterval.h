@@ -25,8 +25,9 @@ protected:
 private:
 	bool paused = true;
 	unsigned long timeInterval = 0;
-	unsigned long lastTime   = 0;
-	unsigned long vStepCount = 0;
-	unsigned long vStepCountLimit = 0xFFFFFFFF;
+	unsigned long timeNow      = 0;
+	unsigned long lastTime     = 0;
+	unsigned long vStepCount   = 0;
+	unsigned long vStepCountLimit = 0xFFFFFFFE;
 	uint8_t vStepHigh = 0;
 };
