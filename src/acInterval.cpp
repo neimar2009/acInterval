@@ -23,7 +23,7 @@ void acIntervalClass::begin(unsigned long timeInit = 0) {
 // Retorna: true, quando o intervalo estiver completo.
 bool acIntervalClass::dispatch() {
 
-  unsigned long timeNow = millis();
+  timeNow = millis();
   if(timeNow >= lastTime) {
     if ((timeNow - lastTime >= timeInterval)) {
       lastTime += timeInterval;
