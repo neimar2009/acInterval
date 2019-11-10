@@ -48,6 +48,11 @@ Help
 
   Retorna o intervalo de tempo entre processos.
 
+### interval
+
+  ```example.interval(newInterval);```    
+  Configura um no interval de tempo. Diferente de ```reset()```, não reiniciar o sistema.
+
 ### pause
 
   Pausa o processo, isto faz ```dispatch()``` retornar sempre ```false```

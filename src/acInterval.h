@@ -16,6 +16,7 @@ public:
 	unsigned long stepCount();
 	void stepCount(unsigned long count);
 	unsigned long interval();
+	void interval(unsigned long timeInterval);
 	void pause();
 	void restart();
 	void reset(unsigned long timeInterval = 0);
@@ -24,10 +25,11 @@ public:
 protected:
 private:
 	bool paused = true;
+	unsigned long startTime    = 0;
 	unsigned long timeInterval = 0;
 	unsigned long timeNow      = 0;
-	unsigned long lastTime     = 0;
+	unsigned long nextDispatch = 0;
 	unsigned long vStepCount   = 0;
-	unsigned long vStepCountLimit = 0xFFFFFFFE;
+	const unsigned long cCountLimit = 0xFFFFFFFF;
 	uint8_t vStepHigh = 0;
 };
